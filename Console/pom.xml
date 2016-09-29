@@ -1,0 +1,278 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>project-console</artifactId>
+  <packaging>war</packaging>
+  <name>project-console</name>
+  <url>http://maven.apache.org</url>
+  
+  <parent>
+    <groupId>com.project</groupId>
+    <artifactId>project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<spring.version>4.2.2.RELEASE</spring.version>
+	<slf4j-log4j12.version>1.6.1</slf4j-log4j12.version>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<servlet-api.version>2.5</servlet-api.version>
+	<jersey-version>1.17</jersey-version>
+	<json-lib-version>2.2.2</json-lib-version>
+</properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  <dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>${json-lib-version}</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.project</groupId>
+			<artifactId>project-common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<!-- spring aop -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- alibaba druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+
+		<!--redis -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.6.0.RELEASE</version>
+		</dependency>
+
+		<!-- common base 64 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+
+ 		<dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+	</dependencies>
+
+
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<port>8084</port>
+					<path>/project-console</path>
+					<!-- 防止 get请求参数乱码 -->
+					<uriEncoding>UTF-8</uriEncoding>
+					<systemProperties>
+						<catalina.home>${project.basedir}/</catalina.home>
+					</systemProperties>
+					<useTestClasspath>false</useTestClasspath>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<db.url>jdbc:mysql://192.168.20.250:3306/project?characterEncoding=utf8</db.url>
+				<db.user>xlingmao</db.user>
+				<db.password>xlingmao</db.password>
+
+				<redis.host>192.168.20.31</redis.host>
+				<redis.port>19000</redis.port>
+				<redis.maxIdle>300</redis.maxIdle>
+				<redis.maxActive>600</redis.maxActive>
+				<redis.maxWait>1000</redis.maxWait>
+				<redis.testOnBorrow>true</redis.testOnBorrow>
+
+				<skip.validate.sign>true</skip.validate.sign> <!-- 跳过签名 -->
+				<sign.timeout.ms>120000</sign.timeout.ms> <!-- 签名过期毫秒 -->
+
+				<activity.publish.job.schedule>0 0/2 * * * ?</activity.publish.job.schedule>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>qa</id>
+			<properties>
+				<db.url>jdbc:mysql://192.168.10.251:3306/project?characterEncoding=utf8</db.url>
+				<db.user>root</db.user>
+				<db.password>xlingmao</db.password>
+
+				<redis.host>192.168.20.60</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.maxIdle>300</redis.maxIdle>
+				<redis.maxActive>600</redis.maxActive>
+				<redis.maxWait>1000</redis.maxWait>
+				<redis.testOnBorrow>true</redis.testOnBorrow>
+
+				<skip.validate.sign>true</skip.validate.sign> <!-- 跳过签名 -->
+				<sign.timeout.ms>120000</sign.timeout.ms> <!-- 签名过期毫秒 -->
+				<activity.publish.job.schedule>0 0/5 * * * ?</activity.publish.job.schedule>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+
+			</properties>
+		</profile>
+
+	</profiles>
+</project>

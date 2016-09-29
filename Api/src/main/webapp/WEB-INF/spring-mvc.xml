@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.project" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
+	
+	<!-- 性能切面配置 -->
+	<bean id="performanceAcpect" class="com.project.api.aspect.performance.PerformanceAcpect" />
+	 <aop:config>
+
+	    <aop:aspect id="performance" ref="performanceAcpect">
+	      <aop:pointcut id="target" expression="execution(* com.project.api..*.*(..))"/>
+	      <aop:around method="around" pointcut-ref="target"/>
+	    </aop:aspect>
+
+  	</aop:config>
+  	
+  	<!-- swagegr配置 -->
+	<bean id="springSwaggerConfig"  class="com.project.api.swagger.SwaggerConfig" />
+	
+	<mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/"/>
+	 
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+		    	<constructor-arg value="UTF-8" />
+			</bean>
+			<!-- 将Jackson2HttpMessageConverter的默认格式化输出设为true -->
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="prettyPrint" value="true"/>
+            </bean>			
+  		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- 定义JSP文件的位置 --> 
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean> -->
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+		 	<mvc:mapping path="/**"/>
+		 	<mvc:exclude-mapping path="/api-docs/**"/>
+			<mvc:exclude-mapping path="/v1/org/init634u89nfrew3127hf"/>
+			<mvc:exclude-mapping path="/v1/system/orgaddactivescore"/>
+			<bean class="com.project.api.interceptor.SignInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/api-docs/**"/>
+			<mvc:exclude-mapping path="/v1/system/**"/>
+            <mvc:exclude-mapping path="/v1/org/list"/>
+            <mvc:exclude-mapping path="/v1/org/commentlist"/>
+            <mvc:exclude-mapping path="/v1/org/category"/>
+			<mvc:exclude-mapping path="/v1/org/search"/>
+			<mvc:exclude-mapping path="/v1/org/info"/>
+            <mvc:exclude-mapping path="/v1/org/init634u89nfrew3127hf"/>
+			<mvc:exclude-mapping path="/v1/system/orgaddactivescore"/>
+            <mvc:exclude-mapping path="/v1/auth/register"/>
+            <mvc:exclude-mapping path="/v1/auth/login"/>
+            <mvc:exclude-mapping path="/v1/auth/thirdregister"/>
+            <mvc:exclude-mapping path="/v1/auth/thirdlogin" />
+            <mvc:exclude-mapping path="/v1/auth/forgetpassword" />
+			<mvc:exclude-mapping path="/v1/home/video" />
+			<mvc:exclude-mapping path="/v1/home/activity" />
+			<mvc:exclude-mapping path="/v1/home/banner" />
+			<mvc:exclude-mapping path="/v1/activity/search"/>
+			<mvc:exclude-mapping path="/v1/activity/list"/>
+			<mvc:exclude-mapping path="/v1/activity/category"/>
+            <mvc:exclude-mapping path="/v1/activity/attendlist"/>
+			<mvc:exclude-mapping path="/v1/activity/commentlist"/>
+			<mvc:exclude-mapping path="/v1/activity/info"/>
+            <mvc:exclude-mapping path="/v1/member/warmheartrank"/>
+			<bean class="com.project.api.interceptor.AuthorizationInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+			
+	<!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->	
+	<mvc:default-servlet-handler/>
+	
+	<!-- 定义无需Controller的url<->view直接映射 -->
+	<!-- <mvc:view-controller path="/" view-name="redirect:/api"/> -->
+	
+	<!--异常处理 -->
+   <!-- <bean class="com.project.api.common.exception.ExceptionHandler" /> -->
+    
+</beans>

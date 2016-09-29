@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.common.mapper.GoodsActionMapper" >
+    <resultMap id="BaseResultMap" type="com.project.common.entity.mybatis.GoodsAction" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="action_name" property="actionName" jdbcType="VARCHAR" />
+        <result column="good_type" property="goodType" jdbcType="VARCHAR" />
+        <result column="limit_time" property="limitTime" jdbcType="VARCHAR" />
+        <result column="limit_total" property="limitTotal" jdbcType="INTEGER" />
+        <result column="exp" property="exp" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="BIGINT" />
+        <result column="creator" property="creator" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+        <result column="updater" property="updater" jdbcType="VARCHAR" />
+        <result column="is_task" property="isTask" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="get_num" property="getNum" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, action_name, good_type, limit_time, limit_total, exp, create_time, creator, update_time, 
+    updater, version,is_task,description,status,get_num
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from YQB_GOODS_GET_ACTION
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from YQB_GOODS_GET_ACTION
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.project.common.entity.mybatis.GoodsAction" >
+    insert into YQB_GOODS_GET_ACTION (id, action_name, good_type, 
+      limit_time, limit_total, exp, 
+      create_time, creator, update_time, 
+      updater, version,is_task,description,status,get_num)
+    values (#{id,jdbcType=INTEGER}, #{actionName,jdbcType=VARCHAR}, #{goodType,jdbcType=VARCHAR}, 
+      #{limitTime,jdbcType=VARCHAR}, #{limitTotal,jdbcType=INTEGER}, #{exp,jdbcType=INTEGER},
+      #{createTime,jdbcType=BIGINT}, #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=BIGINT}, 
+      #{updater,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER},#{isTask,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR}
+      ,#{getNum,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.project.common.entity.mybatis.GoodsAction" >
+        insert into YQB_GOODS_GET_ACTION
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="actionName != null" >
+                action_name,
+            </if>
+            <if test="goodType != null" >
+                good_type,
+            </if>
+            <if test="limitTime != null" >
+                limit_time,
+            </if>
+            <if test="limitTotal != null" >
+                limit_total,
+            </if>
+            <if test="exp != null" >
+                exp,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="creator != null" >
+                creator,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="updater != null" >
+                updater,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="isTask != null" >
+                is_task,
+            </if>
+            <if test="description != null" >
+                description,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="getNum != null" >
+                get_num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="actionName != null" >
+                #{actionName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodType != null" >
+                #{goodType,jdbcType=VARCHAR},
+            </if>
+            <if test="limitTime != null" >
+                #{limitTime,jdbcType=VARCHAR},
+            </if>
+            <if test="limitTotal != null" >
+                #{limitTotal,jdbcType=INTEGER},
+            </if>
+            <if test="exp != null" >
+                #{exp,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="creator != null" >
+                #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="updater != null" >
+                #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="isTask != null" >
+                #{isTask,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="getNum != null" >
+                #{getNum,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.project.common.entity.mybatis.GoodsAction" >
+        update YQB_GOODS_GET_ACTION
+        <set >
+            <if test="actionName != null" >
+                action_name = #{actionName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodType != null" >
+                good_type = #{goodType,jdbcType=VARCHAR},
+            </if>
+            <if test="limitTime != null" >
+                limit_time = #{limitTime,jdbcType=VARCHAR},
+            </if>
+            <if test="limitTotal != null" >
+                limit_total = #{limitTotal,jdbcType=INTEGER},
+            </if>
+            <if test="exp != null" >
+                exp = #{exp,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="creator != null" >
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="updater != null" >
+                updater = #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="isTask != null" >
+                is_task = #{isTask,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                updater = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="getNum != null" >
+                get_num = #{getNum,jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.project.common.entity.mybatis.GoodsAction" >
+    update YQB_GOODS_GET_ACTION
+    set action_name = #{actionName,jdbcType=VARCHAR},
+      good_type = #{goodType,jdbcType=VARCHAR},
+      limit_time = #{limitTime,jdbcType=VARCHAR},
+      limit_total = #{limitTotal,jdbcType=INTEGER},
+      exp = #{exp,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      updater = #{updater,jdbcType=VARCHAR},
+      is_task = #{isTask,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      get_num = #{getNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="getActionByActionType" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from `YQB_GOODS_GET_ACTION`
+        where action_name = #{actionType,jdbcType=VARCHAR}
+        <if test="status != null" >
+            and status = #{status,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

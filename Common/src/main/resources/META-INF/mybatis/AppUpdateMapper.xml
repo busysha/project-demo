@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.common.mapper.AppUpdateMapper" >
+  <resultMap id="BaseResultMap" type="com.project.common.entity.mybatis.AppUpdate" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="now_version" property="nowVersion" jdbcType="VARCHAR" />
+    <result column="is_force" property="isForce" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="download_url" property="downloadUrl" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.project.common.entity.mybatis.AppUpdate" extends="BaseResultMap" >
+    <result column="descriptions" property="descriptions" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, platform, now_version, is_force, create_time, update_time, creator, updater, 
+    version,download_url,descriptions
+  </sql>
+  <sql id="Blob_Column_List" >
+    descriptions
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from YQB_APP_UPDATE
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from YQB_APP_UPDATE
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.common.entity.mybatis.AppUpdate" >
+    insert into YQB_APP_UPDATE (id, platform, now_version, 
+      is_force, create_time, update_time, 
+      creator, updater, version, 
+      descriptions,download_url)
+    values (#{id,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR}, #{nowVersion,jdbcType=VARCHAR}, 
+      #{isForce,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{creator,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{descriptions,jdbcType=LONGVARCHAR},#{downloadUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.common.entity.mybatis.AppUpdate" >
+    insert into YQB_APP_UPDATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="nowVersion != null" >
+        now_version,
+      </if>
+      <if test="isForce != null" >
+        is_force,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="descriptions != null" >
+        descriptions,
+      </if>
+      <if test="downloadUrl != null" >
+        download_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="nowVersion != null" >
+        #{nowVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="isForce != null" >
+        #{isForce,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="descriptions != null" >
+        #{descriptions,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="downloadUrl != null" >
+        #{downloadUrl,jdbcType=LONGVARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.common.entity.mybatis.AppUpdate" >
+    update YQB_APP_UPDATE
+    <set >
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="nowVersion != null" >
+        now_version = #{nowVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="isForce != null" >
+        is_force = #{isForce,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="descriptions != null" >
+        descriptions = #{descriptions,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="downloadUrl != null" >
+        download_url = #{downloadUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.project.common.entity.mybatis.AppUpdate" >
+    update YQB_APP_UPDATE
+    set platform = #{platform,jdbcType=VARCHAR},
+      now_version = #{nowVersion,jdbcType=VARCHAR},
+      is_force = #{isForce,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      download_url = #{downloadUrl,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      descriptions = #{descriptions,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.common.entity.mybatis.AppUpdate" >
+    update YQB_APP_UPDATE
+    set platform = #{platform,jdbcType=VARCHAR},
+      now_version = #{nowVersion,jdbcType=VARCHAR},
+      is_force = #{isForce,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      download_url = #{downloadUrl,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectUpdateInfoByPlatform" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,<include refid="Blob_Column_List" />
+    from YQB_APP_UPDATE
+    where platform = #{platform,jdbcType=VARCHAR}
+    order by create_time desc
+    limit 1;
+  </select>
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.common.mapper.RegionMapper" >
+  <resultMap id="BaseResultMap" type="com.project.common.entity.mybatis.Region" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parent" property="parent" jdbcType="INTEGER" />
+    <result column="region_name" property="regionName" jdbcType="VARCHAR" />
+    <result column="ping_name" property="pingName" jdbcType="VARCHAR" />
+    <result column="region_type" property="regionType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parent, region_name, ping_name, region_type, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from YQB_REGION
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCityByProvinceId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from YQB_REGION
+   	where status = "A" and parent = #{provinceId,jdbcType=INTEGER}
+    order by ping_name asc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from YQB_REGION
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.common.entity.mybatis.Region" >
+    insert into YQB_REGION (id, parent, region_name, 
+      ping_name, region_type, status)
+    values (#{id,jdbcType=INTEGER}, #{parent,jdbcType=INTEGER}, #{regionName,jdbcType=VARCHAR}, 
+      #{pingName,jdbcType=VARCHAR}, #{regionType,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.common.entity.mybatis.Region" >
+    insert into YQB_REGION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parent != null" >
+        parent,
+      </if>
+      <if test="regionName != null" >
+        region_name,
+      </if>
+      <if test="pingName != null" >
+        ping_name,
+      </if>
+      <if test="regionType != null" >
+        region_type,
+      </if>
+      <if test="status != null" >
+        status
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parent != null" >
+        #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="regionName != null" >
+        #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="pingName != null" >
+        #{pingName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionType != null" >
+        #{regionType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR}
+      </if>
+     
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.common.entity.mybatis.Region" >
+    update YQB_REGION
+    <set >
+      <if test="parent != null" >
+        parent = #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="regionName != null" >
+        region_name = #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="pingName != null" >
+        ping_name = #{pingName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionType != null" >
+        region_type = #{regionType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR}
+      </if>
+     
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.common.entity.mybatis.Region" >
+    update YQB_REGION
+    set parent = #{parent,jdbcType=INTEGER},
+      region_name = #{regionName,jdbcType=VARCHAR},
+      ping_name = #{pingName,jdbcType=VARCHAR},
+      region_type = #{regionType,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectRegionSortByFirstLetter" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `YQB_REGION`
+    where
+    status = "A"
+    and
+    parent != 0
+    order by ping_name asc
+  </select>
+
+  <select id="selectRegionByName" parameterType="map" resultMap="BaseResultMap">
+    <bind name="pattern" value="'%' + cityName + '%'" />
+    select
+    <include refid="Base_Column_List" />
+    from `YQB_REGION`
+    where status = "A"
+    and region_name like #{pattern} and parent != 0
+    order by ping_name asc
+  </select>
+
+</mapper>

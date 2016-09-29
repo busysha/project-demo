@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.common.mapper.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.project.common.entity.mybatis.Member" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="avatar_img" property="avatarImg" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, nickname, avatar_img, mobile, gender, age, channel, channel_id, type, status, 
+    create_time, update_time, creator, updater, version, password
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from YQB_MEMBER
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectMemberByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from YQB_MEMBER
+    where nickname = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from YQB_MEMBER
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.common.entity.mybatis.Member" keyProperty="id" useGeneratedKeys="true">
+    insert into YQB_MEMBER (id, nickname, avatar_img, 
+      mobile, gender, age, 
+      channel, channel_id, type, 
+      status, create_time, update_time, 
+      creator, updater, version,password
+      )
+    values (#{id,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{avatarImg,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{channel,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{creator,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER},#{password,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.common.entity.mybatis.Member" >
+    insert into YQB_MEMBER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="avatarImg != null" >
+        avatar_img,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="password != null" >
+        password
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarImg != null" >
+        #{avatarImg,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.common.entity.mybatis.Member" >
+    update YQB_MEMBER
+    <set >
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarImg != null" >
+        avatar_img = #{avatarImg,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.common.entity.mybatis.Member" >
+    update YQB_MEMBER
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      avatar_img = #{avatarImg,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      channel = #{channel,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      password= #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectMemberByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from YQB_MEMBER
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectMemberByParams" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from YQB_MEMBER
+    where 1=1
+   <foreach collection="params.keys" item="key">
+   		<choose>
+   			<when test="key == 'nickname'">
+   				and ${key} like CONCAT('%','${params[key]}','%' )
+   			</when>
+   			<otherwise>
+   				and ${key} = #{params[${key}]}
+   			</otherwise>
+   		</choose>
+    </foreach>
+    order by create_time desc
+    limit #{offset} , #{limit};
+  </select>
+  
+  <select id="selectMemberByType" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from YQB_MEMBER
+    where 
+    type = #{type,jdbcType=VARCHAR} 
+    order by create_time desc
+  </select>
+  
+  <select id="countByParams" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*)
+    from YQB_MEMBER
+    where 1=1
+   <foreach collection="params.keys" item="key" separator="and">
+    	<choose>
+   			<when test="key == 'nickname'">
+   				and ${key} like CONCAT('%','${params[key]}','%' )
+   			</when>
+   			<otherwise>
+   				and ${key} = #{params[${key}]}
+   			</otherwise>
+   		</choose>
+    </foreach>
+  </select>
+
+
+  <update id="updateByVersion" parameterType="map" >
+    update YQB_MEMBER
+    <set >
+      <if test="member.nickname != null" >
+        nickname = #{member.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="member.avatarImg != null" >
+        avatar_img = #{member.avatarImg,jdbcType=VARCHAR},
+      </if>
+      <if test="member.mobile != null" >
+        mobile = #{member.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="member.gender != null" >
+        gender = #{member.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="member.age != null" >
+        age = #{member.age,jdbcType=INTEGER},
+      </if>
+      <if test="member.channel != null" >
+        channel = #{member.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="member.channelId != null" >
+        channel_id = #{member.channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="member.type != null" >
+        type = #{member.type,jdbcType=VARCHAR},
+      </if>
+      <if test="member.status != null" >
+        status = #{member.status,jdbcType=VARCHAR},
+      </if>
+      <if test="member.createTime != null" >
+        create_time = #{member.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="member.updateTime != null" >
+        update_time = #{member.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="member.creator != null" >
+        creator = #{member.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="member.updater != null" >
+        updater = #{member.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="member.version != null" >
+        version = #{member.version,jdbcType=INTEGER} + 1,
+      </if>
+      <if test="member.password != null" >
+        password = #{member.password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{member.id,jdbcType=INTEGER} and version = #{member.version,jdbcType=INTEGER}
+  </update>
+  <select id="selectMemberByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from YQB_MEMBER
+    where channel_id = #{openId,jdbcType=VARCHAR} and channel = #{channel,jdbcType=VARCHAR}
+  </select>
+</mapper>
